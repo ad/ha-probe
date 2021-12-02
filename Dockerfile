@@ -1,8 +1,8 @@
-FROM danielapatin/probe:latest
+FROM danielapatin/probe:latest AS builder
 
-COPY /usr/share/zoneinfo /usr/share/zoneinfo
-COPY /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-COPY /go/bin/ipmn2-client /go/bin/ipmn2-client
+COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=builder /go/bin/ipmn2-client /go/bin/ipmn2-client
 
 ENTRYPOINT ["/go/bin/ipmn2-client"]
 

@@ -1,5 +1,6 @@
 {
   "name": "Probe",
+  "image": "danielapatin/probe",
   "version": "1",
   "slug": "probe",
   "description": "Probe",

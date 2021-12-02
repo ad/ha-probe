@@ -1,0 +1,23 @@
+{
+  "name": "Probe",
+  "version": "1",
+  "slug": "probe",
+  "description": "Probe",
+  "arch": ["arm64", "amd64"],
+  "startup": "application",
+  "boot": "auto",
+  "options": {
+    "beer": true,
+    "wine": true,
+    "liquor": false,
+    "name": "world",
+    "year": 2017
+  },
+  "schema": {
+    "beer": "bool",
+    "wine": "bool",
+    "liquor": "bool",
+    "name": "str",
+    "year": "int"
+  },
+}

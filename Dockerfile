@@ -1,4 +1,4 @@
-FROM danielapatin/zond:latest
+FROM danielapatin/probe:latest
 
 COPY /usr/share/zoneinfo /usr/share/zoneinfo
 COPY /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/

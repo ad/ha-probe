@@ -1,7 +1,6 @@
 {
   "name": "Probe",
-  "image": "danielapatin/probe",
-  "version": "4",
+  "version": "5",
   "slug": "probe",
   "description": "Probe",
   "arch": ["amd64", "armv7", "aarch64"],

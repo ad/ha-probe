@@ -9,7 +9,7 @@ ENTRYPOINT ["/go/bin/ipmn2-client"]
 
 # Labels
 LABEL \
-    io.hass.name="danielapatin/probe" \
+    io.hass.name="ad/ha-probe" \
     io.hass.description="Probe" \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \

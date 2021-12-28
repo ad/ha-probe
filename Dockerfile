@@ -14,7 +14,7 @@ LABEL \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \
     maintainer="ad <github@apatin.ru>" \
-    org.label-schema.description="Fast and lightweight DNS proxy as ad-blocker for local network with many features" \
+    org.label-schema.description="Probe" \
     org.label-schema.build-date=${BUILD_DATE} \
     org.label-schema.name="danielapatin/probe" \
     org.label-schema.schema-version="1.0" \

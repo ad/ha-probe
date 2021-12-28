@@ -1,6 +1,6 @@
 {
   "name": "Probe",
-  "version": "6",
+  "version": "7",
   "slug": "probe",
   "description": "Probe",
   "arch": ["amd64", "armv7", "aarch64"],

@@ -1,0 +1,49 @@
+name: Update probe image
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pin latest probe digest
+        run: |
+          set -euo pipefail
+          TOKEN=$(curl -fsS "https://ghcr.io/token?scope=repository:ipmn/probe:pull&service=ghcr.io" | jq -r .token)
+          DIGEST=$(curl -fsSI \
+            -H "Authorization: Bearer ${TOKEN}" \
+            -H "Accept: application/vnd.oci.image.index.v1+json,application/vnd.docker.distribution.manifest.list.v2+json" \
+            https://ghcr.io/v2/ipmn/probe/manifests/latest \
+            | tr -d '\r' | awk 'tolower($1) == "docker-content-digest:" { print $2 }')
+          [ -n "${DIGEST}" ] || { echo "no digest for ghcr.io/ipmn/probe:latest"; exit 1; }
+
+          # a single-arch image would break the aarch64/armv7 installs listed in config.json
+          ARCHES=$(curl -fsS \
+            -H "Authorization: Bearer ${TOKEN}" \
+            -H "Accept: application/vnd.oci.image.index.v1+json,application/vnd.docker.distribution.manifest.list.v2+json" \
+            https://ghcr.io/v2/ipmn/probe/manifests/latest \
+            | jq -r '[.manifests[]?.platform.architecture] | join(",")')
+          case ",${ARCHES}," in
+            *,arm64,*) ;;
+            *) echo "skip: ${DIGEST} covers only [${ARCHES}]"; exit 0 ;;
+          esac
+
+          sed -i -E "s#ghcr\.io/ipmn/probe(:[^ ]+|@sha256:[a-f0-9]+)#ghcr.io/ipmn/probe@${DIGEST}#" Dockerfile
+          jq --arg v "${DIGEST#sha256:}" '.version = $v[0:8]' config.json > config.json.tmp
+          mv config.json.tmp config.json
+
+      - name: Commit
+        run: |
+          git diff --quiet && { echo "already up to date"; exit 0; }
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git commit -am "Update probe image to $(jq -r .version config.json)"
+          git push

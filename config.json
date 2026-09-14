@@ -1,9 +1,13 @@
 {
   "name": "Probe",
-  "version": "8",
+  "version": "5bcc0b73",
   "slug": "probe",
   "description": "Probe",
-  "arch": ["amd64", "armv7", "aarch64"],
+  "arch": [
+    "amd64",
+    "armv7",
+    "aarch64"
+  ],
   "startup": "application",
   "boot": "auto",
   "options": {

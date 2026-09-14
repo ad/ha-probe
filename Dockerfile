@@ -1,11 +1,8 @@
-FROM danielapatin/probe:latest AS builder
+FROM ghcr.io/ipmn/probe:latest
 
-COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
-COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-COPY --from=builder /go/bin/ipmn2-client /go/bin/ipmn2-client
-
-ENTRYPOINT ["/go/bin/ipmn2-client"]
-
+ARG BUILD_ARCH
+ARG BUILD_DATE
+ARG BUILD_REF
 
 # Labels
 LABEL \
@@ -16,7 +13,7 @@ LABEL \
     maintainer="ad <github@apatin.ru>" \
     org.label-schema.description="Probe" \
     org.label-schema.build-date=${BUILD_DATE} \
-    org.label-schema.name="danielapatin/probe" \
+    org.label-schema.name="ghcr.io/ipmn/probe" \
     org.label-schema.schema-version="1.0" \
     org.label-schema.usage="https://gitlab.com/ad/ha-probe/-/blob/master/README.md" \
     org.label-schema.vcs-ref=${BUILD_REF} \

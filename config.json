@@ -1,23 +1,29 @@
 {
   "name": "Probe",
-  "version": "7",
+  "version": "8",
   "slug": "probe",
   "description": "Probe",
   "arch": ["amd64", "armv7", "aarch64"],
   "startup": "application",
   "boot": "auto",
   "options": {
-    "beer": true,
-    "wine": true,
-    "liquor": false,
-    "name": "world",
-    "year": 2017
+    "SERVER_ADDR": "81.163.31.129:50005",
+    "UUID": "",
+    "SECRET": "",
+    "MAX_WORKERS": 10,
+    "METRICS_LISTEN": "",
+    "PLUGINS_DISABLE": "",
+    "STREAM_IDLE_TIMEOUT": "",
+    "DEBUG": false
   },
   "schema": {
-    "beer": "bool",
-    "wine": "bool",
-    "liquor": "bool",
-    "name": "str",
-    "year": "int"
+    "SERVER_ADDR": "str",
+    "UUID": "str",
+    "SECRET": "password",
+    "MAX_WORKERS": "int(1,10)",
+    "METRICS_LISTEN": "str?",
+    "PLUGINS_DISABLE": "str?",
+    "STREAM_IDLE_TIMEOUT": "str?",
+    "DEBUG": "bool?"
   }
 }

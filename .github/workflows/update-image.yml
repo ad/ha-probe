@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # re-runs otherwise check out the stale sha and fail to push
+          ref: main
 
       - name: Pin latest probe digest
         run: |

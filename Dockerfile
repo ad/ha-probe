@@ -1,4 +1,4 @@
-FROM ghcr.io/ipmn/probe@sha256:86417c9539883bcdbc6fec18c79b379e7afceb54fb9132c87782d3ec5666155b
+FROM ghcr.io/ipmn/probe@sha256:6d3a4fbc05e0c0894f4667875643162fb3a63895db464ec47a0c22fcc57beecc
 
 ARG BUILD_ARCH
 ARG BUILD_DATE
